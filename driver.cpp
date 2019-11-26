@@ -37,17 +37,32 @@ int main()
 {
 	// Load the trial set
 	load_trials();
+	int max_trials = trial_queue.size(); // number of trials to process
+	int count = 0; // current trial number
 
 	// Main trial loop
 	while (trial_queue.empty() == false)
 	{
+		count++;
+
 		// Get the trial
 		int id = get<0>(trial_queue.front());
 		string path = get<1>(trial_queue.front());
 		trial_queue.pop();
 
-		//////////////////// run trial and time and print header, write log
-		cout << id << '\t' << path << endl;
+		// Print header
+		cout << "######################################################################" << endl;
+		cout << "Beginnig trial " << count << " / " << max_trials << endl;
+		cout << "######################################################################\n" << endl;
+
+		// Call solution algorithm
+		clock_t start = clock(); // start timer
+		string command = string(SOLVER) + ' ' + path; // full command to call solver with its argument
+		int exit_code = system(command.c_str()); // call solver and get exit code
+		double solution_time = (1.0*clock() - start) / CLOCKS_PER_SEC; // calculate solution time (in seconds)
+
+		cout << "\n\n\n----------------------------------------------------------------------" << endl;
+		cout << "Trial finished in " << s2hms(solution_time) << "\n\n\n";
 	}
 
 	cin.get();
