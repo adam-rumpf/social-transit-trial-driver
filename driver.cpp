@@ -30,7 +30,7 @@ void load_trials();
 string s2hms(double);
 
 // Global variables
-queue<tuple<int, string>> trial_queue; // queue of trials to process, each consisting of a tuple of ID and file path
+queue<tuple<string, string>> trial_queue; // queue of trials to process, each consisting of a tuple of label and file path
 
 /// Main driver.
 int main()
@@ -46,13 +46,13 @@ int main()
 		count++;
 
 		// Get the trial
-		int id = get<0>(trial_queue.front());
+		string label = get<0>(trial_queue.front());
 		string path = get<1>(trial_queue.front());
 		trial_queue.pop();
 
 		// Print header
 		cout << "######################################################################" << endl;
-		cout << "Beginnig trial " << count << " / " << max_trials << endl;
+		cout << "Beginnig trial " << count << " / " << max_trials << " (" << label << ')' << endl;
 		cout << "######################################################################\n" << endl;
 
 		// Call solution algorithm
@@ -88,8 +88,8 @@ void load_trials()
 			stringstream stream(line);
 
 			// Go through each piece of the line
-			getline(stream, piece, '\t'); // ID
-			int trial_id = stoi(piece);
+			getline(stream, piece, '\t'); // label
+			string trial_id = piece;
 			getline(stream, piece, '\t'); // file path
 			string trial_path = piece;
 
