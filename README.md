@@ -1,6 +1,6 @@
 # social-transit-trial-driver
 
-A driver for running batches of test cases through the main solver for a research project of mine dealing with public transit design with social access objectives.
+A driver for running batches of test cases through the main solver for a research project of mine dealing with public transit design with social access objectives (see project home page [here](https://github.com/adam-rumpf/social-transit)).
 
 This program is meant to act as a driver for running the main solution algorithm [social-transit-solver](https://github.com/adam-rumpf/social-transit-solver) repeatedly for different sets of input files. See the main solver's README for a full description of its input file format, and see its release page for an executable version. The driver, itself, requires an input file [`trials.txt`](#trialstxt) to specify the set of trials to be run, and outputs a file [`log.txt`](#logtxt) containing a log of the trial execution results.
 
